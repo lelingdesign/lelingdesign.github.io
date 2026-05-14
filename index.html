@@ -1,0 +1,690 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>樂齡築家 Ageless Nest · 歲月靜好，安居無礙</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+TC:wght@500;600;700&family=Noto+Sans+TC:wght@400;500;700;900&family=JetBrains+Mono:wght@500&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --paper:    #F5EFE6;
+    --paper-2:  #EFE7DB;
+    --ink:      #1A1815;
+    --ink-soft: #3E3A33;
+    --ink-mute: #6B6459;
+    --line:     #D9CFBF;
+    --card:     #FBF7F0;
+    --c-clay:   #B8603E;
+    --c-clay-2: #C77B5C;
+    --c-oak:    #C9A97A;
+    --c-taupe:  #9A8F7E;
+    --c-moss:   #7C8A6E;
+    --c-cream:  #E8DCC6;
+    --c-stone:  #2B2823;
+
+    --serif: "Noto Serif TC", serif;
+    --sans:  "Noto Sans TC", -apple-system, system-ui, sans-serif;
+    --mono:  "JetBrains Mono", ui-monospace, monospace;
+  }
+
+  *{ box-sizing: border-box; }
+  html{ scroll-behavior: smooth; }
+  body{
+    margin: 0; padding: 0;
+    font-family: var(--sans); font-weight: 400;
+    font-size: 18px; line-height: 1.7;
+    color: var(--ink); background: var(--paper);
+    -webkit-font-smoothing: antialiased;
+  }
+  h1,h2,h3{ font-family: var(--serif); font-weight: 600; color: var(--ink); margin: 0; }
+  p{ margin: 0; }
+  a{ color: inherit; text-decoration: none; }
+
+  .wrap{ max-width: 1160px; margin: 0 auto; padding: 0 40px; }
+
+  .eyebrow{
+    font-family: var(--sans); font-weight: 500;
+    font-size: 14px; letter-spacing: .24em;
+    color: var(--c-clay); text-transform: uppercase;
+  }
+
+  /* ------- NAV ------- */
+  .nav{
+    position: sticky; top: 0; z-index: 50;
+    background: rgba(245,239,230,.9);
+    backdrop-filter: blur(10px);
+    border-bottom: 1px solid var(--line);
+  }
+  .nav-inner{
+    display:flex; align-items:center; justify-content: space-between;
+    padding: 16px 40px;
+    max-width: 1160px; margin: 0 auto;
+  }
+  .nav .brand{ display:flex; align-items:center; gap: 10px; }
+  .nav .brand svg{ width: 38px; height: 34px; }
+  .nav .brand .name{
+    font-family: var(--serif); font-weight: 600;
+    font-size: 20px; letter-spacing: .16em; padding-left: .16em;
+  }
+  .nav ul{
+    list-style:none; margin:0; padding:0;
+    display:flex; gap: 28px; align-items:center;
+  }
+  .nav ul a{
+    font-size: 16px; color: var(--ink-soft); font-weight: 500;
+    padding: 6px 4px;
+  }
+  .nav ul a:hover{ color: var(--c-clay); }
+  .nav .cta{
+    background: var(--c-clay); color: #FBF7F0;
+    padding: 10px 20px; border-radius: 999px;
+    font-weight: 700; font-size: 15px;
+  }
+  .nav .cta:hover{ background: var(--ink); }
+
+  /* ------- HERO ------- */
+  .hero{
+    padding: 80px 0 90px;
+    position: relative; overflow:hidden;
+  }
+  .hero::before{
+    content:""; position:absolute; inset: 0;
+    background:
+      radial-gradient(1200px 700px at 10% 0%, rgba(201,169,122,.25), transparent 60%),
+      radial-gradient(1000px 700px at 100% 100%, rgba(184,96,62,.10), transparent 60%);
+    pointer-events: none;
+  }
+  .hero-inner{
+    display:grid; grid-template-columns: 1.1fr 1fr;
+    gap: 64px; align-items: center;
+    position: relative; z-index: 1;
+  }
+  .hero h1{
+    font-size: 58px; line-height: 1.15;
+    letter-spacing: .04em; margin-top: 18px;
+  }
+  .hero h1 em{ font-style: normal; color: var(--c-clay); }
+  .hero .lead{
+    font-size: 20px; color: var(--ink-soft);
+    margin-top: 24px; max-width: 520px;
+  }
+  .hero .cta-row{
+    display:flex; gap: 14px; margin-top: 32px; flex-wrap: wrap;
+  }
+  .btn{
+    display:inline-flex; align-items:center; gap: 10px;
+    padding: 16px 26px; border-radius: 999px;
+    font-weight: 700; font-size: 16px; letter-spacing: .04em;
+    border: 2px solid transparent;
+    transition: all .15s ease;
+  }
+  .btn.primary{
+    background: var(--c-clay); color: #FBF7F0;
+  }
+  .btn.primary:hover{ background: var(--ink); }
+  .btn.ghost{
+    background: transparent; color: var(--ink);
+    border-color: var(--ink);
+  }
+  .btn.ghost:hover{ background: var(--ink); color: var(--paper); }
+
+  .hero .trust{
+    display:flex; gap: 32px; margin-top: 40px;
+    padding-top: 28px; border-top: 1px solid var(--line);
+    max-width: 560px;
+  }
+  .hero .trust .item .n{
+    font-family: var(--serif); font-weight: 600;
+    font-size: 34px; color: var(--ink); line-height: 1;
+  }
+  .hero .trust .item .l{
+    font-size: 14px; color: var(--ink-soft);
+    margin-top: 6px; letter-spacing: .06em;
+  }
+
+  .hero-visual{
+    position: relative;
+    aspect-ratio: 5 / 6;
+    border-radius: 24px;
+    background: linear-gradient(175deg, #F3E4CB 0%, #E8D5B3 65%, #D9BE92 100%);
+    overflow: hidden;
+    box-shadow: 0 40px 80px -40px rgba(60,40,20,.4);
+  }
+  .hero-visual svg, .hero-visual img{ width:100%; height: 100%; display:block; object-fit: cover; }
+  .hero-visual .tag{
+    position:absolute; top: 20px; left: 20px;
+    background: rgba(251,247,240,.9);
+    backdrop-filter: blur(4px);
+    padding: 8px 14px; border-radius: 999px;
+    font-family: var(--mono); font-size: 11px; letter-spacing: .18em;
+    color: var(--ink-soft); text-transform: uppercase;
+  }
+  .hero-visual .caption{
+    position:absolute; bottom: 20px; left: 20px; right: 20px;
+    background: rgba(26,24,21,.82); color: #F5EFE6;
+    padding: 14px 18px; border-radius: 14px;
+    font-size: 15px; line-height: 1.5; text-align: center;
+  }
+
+  /* ------- SECTION SHELL ------- */
+  section{ padding: 90px 0; }
+  section.alt{ background: var(--paper-2); }
+  .section-head{
+    max-width: 760px; margin: 0 auto 56px;
+    text-align: center;
+  }
+  .section-head h2{
+    font-size: 42px; line-height: 1.25; letter-spacing: .03em;
+    margin-top: 14px;
+  }
+  .section-head p{
+    margin-top: 16px; font-size: 18px; color: var(--ink-soft);
+  }
+
+  /* ------- TRUST STRIP ------- */
+  .trust-strip{
+    background: var(--ink);
+    color: var(--paper);
+    padding: 32px 0;
+  }
+  .trust-strip .wrap{
+    display:flex; justify-content: space-between; align-items: center;
+    flex-wrap: wrap; gap: 24px;
+  }
+  .trust-strip .label{
+    font-size: 17px; color: var(--c-oak);
+  }
+  .trust-strip .seals{
+    display:flex; gap: 28px; align-items:center; flex-wrap: wrap;
+  }
+  .trust-strip .seal{
+    font-size: 17px; color: #F5EFE6;
+  }
+
+  /* ------- SERVICES ------- */
+  .services{
+    display:grid; grid-template-columns: repeat(3, 1fr);
+    gap: 24px;
+  }
+  .service{
+    background: var(--card);
+    border: 1px solid var(--line);
+    border-radius: 20px;
+    padding: 36px 32px;
+    transition: all .2s ease;
+  }
+  .service:hover{
+    transform: translateY(-3px);
+    box-shadow: 0 30px 60px -40px rgba(60,40,20,.4);
+    border-color: var(--c-clay);
+  }
+  .service .ic{
+    width: 56px; height: 56px; border-radius: 14px;
+    background: var(--c-cream);
+    color: var(--c-clay);
+    display:flex; align-items:center; justify-content:center;
+    margin-bottom: 22px;
+  }
+  .service h3{ font-size: 24px; letter-spacing:.06em; }
+  .service p{ margin-top: 12px; color: var(--ink-soft); font-size: 16px; }
+  .service ul{
+    margin: 18px 0 0; padding: 0; list-style: none;
+    border-top: 1px solid var(--line);
+  }
+  .service li{
+    padding: 10px 0 10px 22px;
+    font-size: 15px; color: var(--ink-soft);
+    border-bottom: 1px solid var(--line);
+    position: relative;
+  }
+  .service li::before{
+    content:""; position: absolute; left: 0; top: 19px;
+    width: 10px; height: 2px; background: var(--c-clay);
+  }
+
+  /* ------- PROCESS ------- */
+  .process{
+    display:grid; grid-template-columns: repeat(4, 1fr);
+    gap: 0;
+    position: relative;
+  }
+  .process::before{
+    content:""; position: absolute;
+    top: 36px; left: 12%; right: 12%;
+    height: 2px; background: var(--line);
+    z-index: 0;
+  }
+  .step{
+    text-align: center; padding: 0 14px;
+    position: relative; z-index: 1;
+  }
+  .step .n{
+    width: 72px; height: 72px;
+    margin: 0 auto 22px;
+    border-radius: 50%;
+    background: var(--paper);
+    border: 2px solid var(--c-clay);
+    color: var(--c-clay);
+    display:flex; align-items:center; justify-content:center;
+    font-family: var(--serif); font-weight: 600; font-size: 28px;
+  }
+  .step h3{ font-size: 28px; margin-bottom: 10px; }
+  .step p{ font-size: 20px; color: var(--ink-soft); }
+
+  /* ------- IMPROVEMENT ------- */
+  .improve{
+    display:grid; grid-template-columns: repeat(3, 1fr);
+    gap: 28px;
+  }
+  .imp-card{
+    background: var(--card);
+    border: 1px solid var(--line);
+    border-radius: 22px;
+    overflow: hidden;
+    display:flex; flex-direction:column;
+    transition: all .2s ease;
+  }
+  .imp-card:hover{
+    transform: translateY(-3px);
+    box-shadow: 0 30px 60px -40px rgba(60,40,20,.4);
+    border-color: var(--c-clay);
+  }
+  .imp-photo{
+    aspect-ratio: 4 / 3;
+    background: var(--paper-2);
+    position: relative;
+    overflow:hidden;
+    border-bottom: 1px solid var(--line);
+  }
+  .imp-photo img{ position:absolute; inset:0; width:100%; height:100%; object-fit: cover; }
+  .imp-photo .ph-inner{
+    position:absolute; inset:14px;
+    border: 2px dashed var(--c-oak);
+    border-radius: 14px;
+    display:flex; flex-direction:column;
+    align-items:center; justify-content:center;
+    gap: 8px;
+    color: var(--ink-mute);
+    background:
+      repeating-linear-gradient(45deg,
+        rgba(201,169,122,.08) 0 14px,
+        transparent 14px 28px);
+  }
+  .imp-photo .ph-inner .label{
+    font-family: var(--mono); font-size: 11px; letter-spacing:.2em;
+    text-transform: uppercase;
+  }
+  .imp-body{
+    padding: 24px 26px 28px;
+    display:flex; flex-direction:column; gap: 10px;
+    flex: 1;
+  }
+  .imp-body .tag{
+    font-family: var(--mono); font-size: 11px; letter-spacing:.2em;
+    color: var(--c-clay); text-transform: uppercase;
+  }
+  .imp-body h3{ font-size: 28px; letter-spacing: .08em; }
+  .imp-body p{ color: var(--ink-soft); font-size: 16px; line-height: 1.7; }
+  .imp-body .specs{
+    margin-top: 6px;
+    display:flex; flex-wrap: wrap; gap: 8px;
+  }
+  .imp-body .specs span{
+    font-size: 13px; color: var(--ink-soft);
+    background: var(--paper-2);
+    padding: 6px 12px; border-radius: 999px;
+  }
+
+  /* ------- CONTACT ------- */
+  .contact{
+    background: var(--ink); color: var(--paper);
+    border-radius: 28px;
+    padding: 60px 56px;
+    display:grid; grid-template-columns: 1.3fr 1fr;
+    gap: 56px;
+    margin: 0 40px;
+  }
+  .contact h2{ color: var(--paper); font-size: 40px; line-height: 1.25; }
+  .contact .lead{
+    margin-top: 16px; color: #D7CFC0; font-size: 17px; max-width: 460px;
+  }
+  .contact .rows{ margin-top: 32px; display:grid; gap: 16px; }
+  .contact .row{
+    display:flex; align-items:center; gap: 16px;
+    font-size: 17px;
+  }
+  .contact .row .k{
+    width: 36px; height: 36px; border-radius: 50%;
+    background: var(--c-clay); color: var(--paper);
+    display:flex; align-items:center; justify-content:center;
+    font-weight: 700; flex-shrink: 0;
+  }
+  .contact .row a{ border-bottom: 1px solid rgba(245,239,230,.3); }
+
+  .qr-panel{
+    background: var(--paper); color: var(--ink);
+    border-radius: 20px;
+    padding: 28px 24px;
+    display:flex; flex-direction:column; align-items:center; text-align: center;
+    gap: 12px;
+  }
+  .qr-panel .qr-box{
+    width: 200px; height: 200px; background: #FBF7F0;
+    border-radius: 12px; border: 2px solid var(--ink);
+    padding: 10px;
+  }
+  .qr-panel .qr-box img{ width:100%; height:100%; display:block; object-fit: contain; }
+  .qr-panel .line-badge{
+    display:inline-flex; align-items:center; gap: 8px;
+    background: #06C755; color: #fff;
+    padding: 8px 16px; border-radius: 999px;
+    font-weight: 700; font-size: 14px; letter-spacing: .06em;
+  }
+  .qr-panel .hint{ font-size: 14px; color: var(--ink-soft); }
+
+  /* ------- FOOTER ------- */
+  footer{
+    padding: 40px 0 30px;
+    border-top: 1px solid var(--line);
+    margin-top: 80px;
+  }
+  footer .wrap{
+    display:flex; justify-content: space-between; align-items:center;
+    flex-wrap: wrap; gap: 16px;
+    font-size: 14px; color: var(--ink-mute);
+  }
+  footer .brand-line{ display:flex; align-items:center; gap: 10px; }
+  footer .brand-line svg{ width: 28px; height: 26px; }
+
+  /* responsive */
+  @media (max-width: 900px){
+    .hero-inner, .contact{ grid-template-columns: 1fr; gap: 40px; }
+    .hero h1{ font-size: 42px; }
+    .services, .improve{ grid-template-columns: 1fr; }
+    .process{ grid-template-columns: repeat(2, 1fr); gap: 32px; }
+    .process::before{ display: none; }
+    .nav ul{ display:none; }
+    section{ padding: 60px 0; }
+  }
+</style>
+</head>
+<body>
+
+<!-- Reusable logo -->
+<svg style="display:none">
+  <symbol id="logo" viewBox="0 0 240 170">
+    <g fill="none" stroke="currentColor" stroke-width="3.4" stroke-linecap="round" stroke-linejoin="round">
+      <path d="M40 92 L120 36 L200 92 L200 142 L40 142 Z"/>
+      <path d="M168 55 L168 42 L180 42 L180 65" stroke-width="3"/>
+      <path d="M74 128 L74 110"/>
+      <path d="M146 128 L146 110"/>
+    </g>
+    <path d="M66 110 Q110 88 154 110" stroke="#B8603E" stroke-width="4" fill="none" stroke-linecap="round"/>
+    <circle cx="66" cy="110" r="5" fill="#B8603E"/>
+    <circle cx="154" cy="110" r="5" fill="#B8603E"/>
+  </symbol>
+</svg>
+
+<!-- NAV -->
+<nav class="nav">
+  <div class="nav-inner">
+    <div class="brand">
+      <svg style="color:#1A1815; width:40px;"><use href="#logo"/></svg>
+      <span class="name">樂齡築家</span>
+    </div>
+    <ul>
+      <li><a href="#improve">局部改善</a></li>
+      <li><a href="#services">服務項目</a></li>
+      <li><a href="#process">設計流程</a></li>
+      <li><a href="#contact" class="cta">免費諮詢</a></li>
+    </ul>
+  </div>
+</nav>
+
+<!-- HERO -->
+<header class="hero">
+  <div class="wrap hero-inner">
+    <div>
+      <span class="eyebrow">家還是家，只是更貼心了</span>
+      <h1>歲月靜好<br>安居無礙</h1>
+      <p class="lead">
+        我們專注於<span style="color:#B8603E;">&nbsp;居家無障礙空間規劃</span>，<br>
+        相信<span style="color:#B8603E;">「優雅變老」</span>是一種需要被設計的生活方式。<br>
+        從防滑地板、連續扶手、到溫暖的光線，<br>
+        都是為了，能夠在自己的家裡，繼續做自己。
+      </p>
+      <div class="cta-row">
+        <a href="#contact" class="btn primary">預約免費到府諮詢 →</a>
+      </div>
+      <div class="trust">
+        <div class="item"><div class="n">100+</div><div class="l">完成個案</div></div>
+        <div class="item"><div class="n">10 年</div><div class="l">室內設計經驗</div></div>
+        <div class="item"><div class="n">4.9 ★</div><div class="l">屋主評價平均</div></div>
+      </div>
+    </div>
+
+    <div class="hero-visual" aria-label="樂齡宅客廳示意">
+      <span class="tag">CASE · 明亮客廳</span>
+      <img src="images/hero-living-room.png" alt="樂齡宅客廳實際案例">
+      <div class="caption">連續扶手 · 起身輔助 · 木地板與柔光 · 安全又溫暖</div>
+    </div>
+  </div>
+</header>
+
+<!-- TRUST STRIP -->
+<div class="trust-strip">
+  <div class="wrap">
+    <div class="label">專業迅速 · 安心服務</div>
+    <div class="seals">
+      <div class="seal">✓ 飯店級管理與施工</div>
+      <div class="seal">✓ 24 小時內報價</div>
+      <div class="seal">✓ 工程履約保固</div>
+      <div class="seal">✓ 透明報價</div>
+    </div>
+  </div>
+</div>
+
+<!-- IMPROVEMENT -->
+<section id="improve">
+  <div class="wrap">
+    <div class="section-head">
+      <span class="eyebrow">Accessibility · 無障礙局部改善</span>
+      <h2>三項重點項目，讓生活更有尊嚴</h2>
+      <p>不用整屋翻修，也能讓長輩住得更安全。從一條扶手、一座浴室、一道斗門開始。</p>
+    </div>
+
+    <div class="improve">
+
+      <article class="imp-card">
+        <div class="imp-photo">
+          <img src="images/improve-handrail.png" alt="扶手安裝實際案例">
+        </div>
+        <div class="imp-body">
+          <span class="tag">01 · Handrail</span>
+          <h3>扶手安裝</h3>
+          <p>走廊、樓梯、浴室、床邊，根據生活動線連續規劃。採用溫潤原木手感與陶土色物件，不只安全、也是家中裝潢的延伸。</p>
+          <div class="specs">
+            <span>最快 1 天完工</span>
+            <span>承重 100kg ↑</span>
+            <span>連續動線</span>
+          </div>
+        </div>
+      </article>
+
+      <article class="imp-card">
+        <div class="imp-photo">
+          <img src="images/improve-bathtub.png" alt="浴缸拆除實際案例">
+        </div>
+        <div class="imp-body">
+          <span class="tag">02 · Bathtub Removal</span>
+          <h3>浴缸拆除</h3>
+          <p>拆除原有浴缸，改為零門檻淋浴區。搭配防滑地板、淋浴座椅與 L 型扶手，讓長輩能自己安心洗澡，減少滑倒風險。</p>
+          <div class="specs">
+            <span>最快 5 天完工</span>
+            <span>零門檻</span>
+            <span>防滑級 IPX</span>
+          </div>
+        </div>
+      </article>
+
+      <article class="imp-card">
+        <div class="imp-photo">
+          <img src="images/improve-ramp.png" alt="斜坡設置實際案例">
+        </div>
+        <div class="imp-body">
+          <span class="tag">03 · Ramp</span>
+          <h3>斜坡設置</h3>
+          <p>消除門檻與高低差，設置符合均規範的緩斜坡道。從玄關、陽台到浴室門檻，讓輪椅、推車、幼兒都能順暢通行。</p>
+          <div class="specs">
+            <span>坡度 ≤ 1:12</span>
+            <span>防滑表面</span>
+            <span>可拆卸設計</span>
+          </div>
+        </div>
+      </article>
+
+    </div>
+  </div>
+</section>
+
+<!-- SERVICES -->
+<section id="services" class="alt">
+  <div class="wrap">
+    <div class="section-head">
+      <span class="eyebrow">Services · 服務項目</span>
+      <h2>從局部改善到全屋翻新</h2>
+      <p>無論是一條扶手、一間浴室，或是整個家，我們都能陪您一起規劃。</p>
+    </div>
+
+    <div class="services">
+      <div class="service">
+        <div class="ic">
+          <svg width="28" height="28" viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M6 24 L6 16"/><path d="M26 24 L26 12"/>
+            <path d="M4 12 Q16 6 28 8"/>
+            <path d="M6 24 L26 24"/>
+          </svg>
+        </div>
+        <h3>無障礙局部安裝</h3>
+        <p>最快 3 天完工，小幅改善、大幅安心。</p>
+        <ul>
+          <li>扶手規劃與安裝</li>
+          <li>防滑地板施作</li>
+          <li>浴室止滑與淋浴座椅</li>
+          <li>夜間照明動線</li>
+        </ul>
+      </div>
+
+      <div class="service">
+        <div class="ic">
+          <svg width="28" height="28" viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M5 15 L16 6 L27 15 L27 26 L5 26 Z"/>
+            <path d="M13 26 L13 18 L19 18 L19 26"/>
+          </svg>
+        </div>
+        <h3>局部翻新</h3>
+        <p>針對浴室、廚房或臥室的重點改造。</p>
+        <ul>
+          <li>樂齡浴室改造</li>
+          <li>廚房高度調整</li>
+          <li>臥室動線重整</li>
+          <li>採光與通風優化</li>
+        </ul>
+      </div>
+
+      <div class="service">
+        <div class="ic">
+          <svg width="28" height="28" viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M4 26 L4 12 L16 4 L28 12 L28 26 Z"/>
+            <path d="M4 26 L28 26"/>
+            <path d="M12 26 L12 18 L20 18 L20 26"/>
+          </svg>
+        </div>
+        <h3>整屋設計</h3>
+        <p>從空間規劃到家具選配，完整陪伴。</p>
+        <ul>
+          <li>3D 擬真設計提案</li>
+          <li>通用設計整體規劃</li>
+          <li>家具與軟裝選配</li>
+          <li>5 年工程保固</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PROCESS -->
+<section id="process" class="alt">
+  <div class="wrap">
+    <div class="section-head">
+      <span class="eyebrow">Process · 合作流程</span>
+      <h2>四個步驟，清楚透明</h2>
+      <p>從第一次見面到交屋之後，每一步都陪著您。</p>
+    </div>
+
+    <div class="process">
+      <div class="step">
+        <div class="n">1</div>
+        <h3>免費諮詢</h3>
+        <p>電話或 LINE 聊聊需求，<br>了解您的家與長輩狀況。</p>
+      </div>
+      <div class="step">
+        <div class="n">2</div>
+        <h3>到府評估</h3>
+        <p>實地丈量、確認動線，<br>提出初步建議與估價。</p>
+      </div>
+      <div class="step">
+        <div class="n">3</div>
+        <h3>設計與施工</h3>
+        <p>3D 提案確認後開工，<br>全程透明進度回報。</p>
+      </div>
+      <div class="step">
+        <div class="n">4</div>
+        <h3>售後保固</h3>
+        <p>交屋後 5 年保固，<br>隨時聯絡、不用擔心。</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section id="contact">
+  <div class="contact">
+    <div>
+      <span class="eyebrow" style="color: var(--c-oak);">Contact · 聯絡我們</span>
+      <h2>歲月靜好，<br>安居無礙。</h2>
+      <p class="lead">不管您只是想裝一根扶手、或正在考慮整屋改造，都歡迎先來聊聊。我們會在 24 小時內回覆。</p>
+
+      <div class="rows">
+        <div class="row"><span class="k">電</span><a href="tel:0900765159">0900 - 765 - 159</a></div>
+        <div class="row"><span class="k">信</span><a href="mailto:lelingdesign@gmail.com">lelingdesign@gmail.com</a></div>
+        <div class="row"><span class="k">時</span>週一至週六 · 09:00 – 18:00</div>
+      </div>
+    </div>
+
+    <div class="qr-panel">
+      <span class="line-badge">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><circle cx="12" cy="12" r="12"/></svg>
+        加入 LINE 好友
+      </span>
+      <div class="qr-box">
+        <img src="images/line-qr.jpg" alt="LINE QR Code">
+      </div>
+      <div class="hint">掃我加好友 · 快速預約免費諮詢</div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <div class="brand-line">
+      <svg style="color: var(--ink)"><use href="#logo"/></svg>
+      <span>樂齡築家 Ageless Nest · © 2026</span>
+    </div>
+  </div>
+</footer>
+
+</body>
+</html>
